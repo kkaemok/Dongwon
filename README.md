@@ -1,2 +1,2 @@
 # Dongwon
-Minecraft server Donwon
+Minecraft server Dongwon
