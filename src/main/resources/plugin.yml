@@ -1,0 +1,42 @@
+name: Dongwon
+description: RPG 서버 '동원'의 핵심 기능들.
+version: '${version}'
+
+main: org.kkaemok.dongwon.Dongwon
+api-version: '1.21'
+load: POSTWORLD
+
+authors: [kkaemok]
+website: https://github.com/kkaemok/Dongwon
+depend: [LuckPerms]
+
+commands:
+  직업:
+    description: 현재 직업 조회 및 목록 확인
+    usage: "/직업 [목록|직업명]"
+  직업설정:
+    description: 플레이어 직업 설정
+    usage: "/직업설정 <플레이어> <직업명>"
+  숙련도:
+    description: 숙련도/특화/화폐 정보 확인
+    usage: "/숙련도 [선택 <시현류|진-검사>]"
+  길드:
+    description: 길드 관리 명령어
+    usage: "/길드 <생성|삭제|탈퇴|정보|퇴출|요청|가입|목록|수락|거절|초대> [이름|플레이어] [색]"
+  동원:
+    description: 동원 관리자 명령어
+    usage: "/동원 <직업설정|캔설정|캔지급|길드관리> ..."
+  메뉴:
+    description: 서버 메뉴를 엽니다
+    usage: "/메뉴"
+  송금:
+    description: 플레이어에게 화폐를 송금합니다
+    usage: "/송금 <플레이어> <수량>"
+  tpa:
+    description: 플레이어에게 순간이동 요청을 보냅니다
+    usage: "/tpa <플레이어> | /tpa <수락|거절> [플레이어]"
+
+permissions:
+  dongwon.op:
+    description: 동원 서버 관리자 권한
+    default: op
