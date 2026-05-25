@@ -1,0 +1,16 @@
+# Dongwon common configuration.
+#
+# Feature-specific settings moved to:
+# - menu.yml
+# - party.yml
+# - land.yml
+# - fastboard.yml
+# - guildconfig.yml
+# - rtp.yml
+# - tpa.yml
+# - mastery.yml
+# - bossbar.yml
+
+messages:
+  common:
+    player-only: '<red>플레이어만 사용할 수 있습니다.'

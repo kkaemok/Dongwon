@@ -1,0 +1,111 @@
+# TPA configuration
+#
+# Text format:
+# - MiniMessage: <green>, <gray>, <#55D6FF>, <bold>
+# - Legacy: &a, &e, &l, &#55D6FF
+#
+# Placeholders:
+# - %requester%: player who sent the request
+# - %target%: player receiving the request
+# - %timeout%: request timeout seconds
+
+request-timeout-seconds: 60
+
+menu:
+  title: '<dark_gray>TPA 요청 확인'
+  refresh-interval-ticks: 20
+  region-label: 'Asia'
+  items:
+    cancel:
+      material: RED_STAINED_GLASS_PANE
+      name: '<red>취소'
+      lore:
+        - '<white>TPA 요청을 보내지 않습니다.'
+
+    confirm:
+      material: LIME_STAINED_GLASS_PANE
+      name: '<green>확인'
+      lore:
+        - '<white>%target% 님에게 TPA 요청을 보냅니다.'
+
+    player:
+      material: PLAYER_HEAD
+      name: '<green>플레이어'
+      lore:
+        - '<white>%target%'
+
+    location:
+      material: GRASS_BLOCK
+      name: '<green>위치'
+      lore:
+        - '<white>%world%'
+
+    region:
+      material: FEATHER
+      name: '<green>지역'
+      lore:
+        - '<white>%region% <aqua>%ping%ms'
+
+reply-menu:
+  title: '<dark_gray>TPA 요청 수락'
+  items:
+    deny:
+      material: RED_STAINED_GLASS_PANE
+      name: '<red>거절'
+      lore:
+        - '<white>%requester% 님의 TPA 요청을 거절합니다.'
+
+    accept:
+      material: LIME_STAINED_GLASS_PANE
+      name: '<green>수락'
+      lore:
+        - '<white>%requester% 님의 TPA 요청을 수락합니다.'
+
+    player:
+      material: PLAYER_HEAD
+      name: '<green>요청자'
+      lore:
+        - '<white>%requester%'
+
+    location:
+      material: GRASS_BLOCK
+      name: '<green>요청자 위치'
+      lore:
+        - '<white>%world%'
+
+    region:
+      material: FEATHER
+      name: '<green>지역'
+      lore:
+        - '<white>%region% <aqua>%ping%ms'
+
+messages:
+  player-only: '<red>플레이어만 사용할 수 있습니다.'
+  usage-request: '<red>사용법: /tpa \<플레이어>'
+  usage-reply: '<red>사용법: /tpa \<수락|거절> [플레이어]'
+  target-offline: '<red>해당 플레이어는 접속 중이 아닙니다.'
+
+  self-request: '<red>자기 자신에게 TPA 요청을 보낼 수 없습니다.'
+  duplicate: '<red>이미 해당 플레이어에게 TPA 요청을 보냈습니다.'
+  target-busy: '<red>해당 플레이어는 다른 TPA 요청을 처리 중입니다.'
+
+  request-received: '<yellow>[TPA] %requester% 님이 당신에게 이동 요청을 보냈습니다.'
+  accept-button: '<green>[수락]'
+  deny-button: '<red>[거절]'
+  request-sent: '<green>[TPA] %target% 님에게 요청을 보냈습니다. (%timeout%초)'
+  request-complete: '<green>요청 전송 완료'
+
+  no-accept-request: '<red>수락할 TPA 요청이 없습니다.'
+  no-deny-request: '<red>거절할 TPA 요청이 없습니다.'
+  requester-offline: '<red>요청한 플레이어가 접속 중이 아닙니다.'
+  requester-mismatch: '<red>해당 플레이어의 요청이 아닙니다.'
+
+  teleported-to-target: '<green>[TPA] %target% 님에게 이동했습니다.'
+  accepted-target: '<green>[TPA] %requester% 님의 요청을 수락했습니다.'
+  accept-complete: '<green>TPA 요청을 수락했습니다.'
+  denied-requester: '<red>[TPA] %target% 님이 요청을 거절했습니다.'
+  deny-complete: '<green>TPA 요청을 거절했습니다.'
+
+  expired: '<red>[TPA] 요청이 만료되었습니다.'
+  cancelled-target-quit: '<red>[TPA] 대상이 접속 종료하여 TPA 요청이 취소되었습니다.'
+  cancelled-requester-quit: '<gray>[TPA] %requester% 님의 요청이 취소되었습니다.'

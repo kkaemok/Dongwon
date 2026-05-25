@@ -1,0 +1,23 @@
+# MiniMessage and legacy color codes are supported.
+
+settings:
+  # Minecraft chest GUI rows. 6 rows = 54 slots.
+  rows: 6
+
+title: '<dark_gray>창고'
+
+sounds:
+  open:
+    enabled: true
+    name: BLOCK_CHEST_OPEN
+    volume: 0.8
+    pitch: 1.0
+  close:
+    enabled: true
+    name: BLOCK_CHEST_CLOSE
+    volume: 0.8
+    pitch: 1.0
+
+messages:
+  opened: ''
+  saved: ''

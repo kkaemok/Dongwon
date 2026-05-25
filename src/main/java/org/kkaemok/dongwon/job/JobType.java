@@ -11,17 +11,20 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum JobType {
-    NONE("none", "없음", JobTier.COMMON),
-    MINER("miner", "광부", JobTier.COMMON, "mining"),
-    WARRIOR("warrior", "전사", JobTier.COMMON),
-    SWORDSMAN("swordsman", "검사", JobTier.COMMON, "sword"),
-    FISHERMAN("fisherman", "낚시꾼", JobTier.COMMON, "fishing"),
-    GUMIHO("gumiho", "구미호", JobTier.UNCOMMON, "kumiho"),
-    ORC("orc", "오크", JobTier.UNCOMMON),
-    SUN_PRIEST("sun_priest", "태양의 사제", JobTier.RARE, "sunpriest"),
-    ANTI_DEBUFFER("anti_debuffer", "안티디버퍼", JobTier.EPIC, "antidebuffer"),
-    CHEONHO("cheonho", "천호", JobTier.LEGENDARY),
-    SHINNONG("shinnong", "염제-신농", JobTier.LEGENDARY, "염제신농", "flame_emperor");
+    NONE("none", "없음", "&7"),
+    MINER("miner", "광부", "&f", "mining"),
+    WARRIOR("warrior", "전사", "&f"),
+    SWORDSMAN("swordsman", "검사", "&f", "sword"),
+    FISHERMAN("fisherman", "낚시꾼", "&f", "fishing"),
+    FARMER("farmer", "농부", "&f", "farm", "농사"),
+    BUFFER("buffer", "버퍼", "&a", "buff", "버프"),
+    HEALER("healer", "힐러", "&a", "heal", "치유사"),
+    GUMIHO("gumiho", "구미호", "&a", "kumiho"),
+    ORC("orc", "오크", "&a"),
+    SUN_PRIEST("sun_priest", "태양의 사제", "&b", "sunpriest"),
+    ANTI_DEBUFFER("anti_debuffer", "안티디버퍼", "&d", "antidebuffer"),
+    CHEONHO("cheonho", "천호", "&e"),
+    SHINNONG("shinnong", "염제-신농", "&e", "염제신농", "flame_emperor");
 
     private static final Map<String, JobType> LOOKUP = new HashMap<>();
 
@@ -36,13 +39,13 @@ public enum JobType {
 
     private final String key;
     private final String displayName;
-    private final JobTier tier;
+    private final String scoreboardColor;
     private final Set<String> aliases;
 
-    JobType(String key, String displayName, JobTier tier, String... aliases) {
+    JobType(String key, String displayName, String scoreboardColor, String... aliases) {
         this.key = key;
         this.displayName = displayName;
-        this.tier = tier;
+        this.scoreboardColor = scoreboardColor;
         this.aliases = Arrays.stream(aliases).collect(Collectors.toUnmodifiableSet());
     }
 
@@ -54,8 +57,8 @@ public enum JobType {
         return displayName;
     }
 
-    public JobTier getTier() {
-        return tier;
+    public String getColoredDisplayName() {
+        return scoreboardColor + displayName;
     }
 
     public boolean isAssignable() {

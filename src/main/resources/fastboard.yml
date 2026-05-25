@@ -1,0 +1,18 @@
+settings:
+  update-interval-ticks: 20
+
+title: '&6&lDongwon'
+
+lines:
+  - '&7이름 &f%player%'
+  - '&7직업 &f%job%'
+  - '&7레벨 &aLv.%level% &7(%level_exp%)'
+  - '&7길드 &f%guild%'
+  - '%party_members%'
+  - ''
+  - '&6황금캔 &f%golden_can%'
+  - '&7실버캔 &f%silver_can%'
+  - '&f캔 &f%can%'
+  - ''
+  - '&a플레이타임'
+  - '&f%playtime%'

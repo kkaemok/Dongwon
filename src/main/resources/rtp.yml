@@ -1,0 +1,34 @@
+countdown-seconds: 3
+
+# Leafcore-style random teleport samples locations around 0,0.
+# The candidate distance is picked between min-distance and max-distance.
+min-distance: 500
+max-distance: 5000
+
+# Legacy fallback. range-by-world overrides max-distance per world.
+default-range: 5000
+max-attempts: 80
+range-by-world:
+  world: 5000
+  world_nether: 3000
+  world_the_end: 5000
+
+# Blocks that cannot be used as RTP landing ground.
+banned-ground-blocks:
+  - LAVA
+  - WATER
+  - MAGMA_BLOCK
+  - CACTUS
+  - FIRE
+  - CAMPFIRE
+  - SOUL_CAMPFIRE
+
+messages:
+  already-running: '<red>이미 RTP가 진행 중입니다.'
+  started: '<green>RTP를 시작했습니다. 움직이면 취소됩니다.'
+  countdown-actionbar: '<gold>RTP %seconds%초... <gray>(이동 시 취소)'
+  waiting-actionbar: '<gray>목적지 청크를 준비하는 중입니다...'
+  cancelled-moved: '<red>RTP가 취소되었습니다. 이동이 감지되었습니다.'
+  failed: '<red>RTP에 실패했습니다. 잠시 후 다시 시도해 주세요.'
+  teleport-failed: '<red>텔레포트에 실패했습니다.'
+  success: '<green>RTP 완료: %x%, %y%, %z%'

@@ -25,38 +25,43 @@ public final class ShihyeonryuService {
 
     private final Plugin plugin;
     private final MasteryService masteryService;
+    private final MasteryConfig config;
     private final Set<UUID> primedPlayers = new HashSet<>();
     private final Map<UUID, BukkitTask> burnoutTasks = new HashMap<>();
 
-    public ShihyeonryuService(Plugin plugin, MasteryService masteryService) {
+    public ShihyeonryuService(Plugin plugin, MasteryService masteryService, MasteryConfig config) {
         this.plugin = plugin;
         this.masteryService = masteryService;
+        this.config = config;
     }
 
-    public boolean tryPrime(Player player) {
+    public void tryPrime(Player player) {
         if (!masteryService.hasSpecialization(player, MasterySpecialization.SHIHYEONRYU)) {
-            return false;
+            return;
         }
         if (!isSword(player.getInventory().getItemInMainHand())) {
-            return false;
+            return;
         }
         UUID playerId = player.getUniqueId();
         if (burnoutTasks.containsKey(playerId)) {
-            player.sendMessage("시현류 후딜이 진행 중입니다.");
-            return true;
+            config.send(player, "shihyeonryu.burnout-running", "<red>시현류 후딜이 진행 중입니다.");
+            return;
         }
         if (primedPlayers.contains(playerId)) {
-            player.sendMessage("시현류는 이미 예열 상태입니다.");
-            return true;
+            config.send(player, "shihyeonryu.already-primed", "<red>시현류는 이미 예열 상태입니다.");
+            return;
         }
 
         primedPlayers.add(playerId);
-        player.addPotionEffect(
-                new PotionEffect(PotionEffectType.STRENGTH, Integer.MAX_VALUE, PRIMED_STRENGTH_LEVEL - 1, false, false, true),
+        applyPotionEffect(player, new PotionEffect(
+                PotionEffectType.STRENGTH,
+                Integer.MAX_VALUE,
+                PRIMED_STRENGTH_LEVEL - 1,
+                false,
+                false,
                 true
-        );
-        player.sendMessage("시현류 예열 완료: 다음 검 타격 1회에 올인합니다.");
-        return true;
+        ));
+        config.send(player, "shihyeonryu.primed", "<green>시현류 예열 완료: 다음 검 타격 1회에 올인합니다.");
     }
 
     public void onMeleeHit(Player player) {
@@ -94,11 +99,15 @@ public final class ShihyeonryuService {
             return;
         }
 
-        player.addPotionEffect(
-                new PotionEffect(PotionEffectType.SLOWNESS, (int) BURNOUT_DURATION_TICKS, ROOT_LEVEL - 1, false, false, true),
+        applyPotionEffect(player, new PotionEffect(
+                PotionEffectType.SLOWNESS,
+                (int) BURNOUT_DURATION_TICKS,
+                ROOT_LEVEL - 1,
+                false,
+                false,
                 true
-        );
-        player.sendMessage("시현류 반동 시작: 10초간 힘이 30에서 1로 감소합니다.");
+        ));
+        config.send(player, "shihyeonryu.burnout-started", "<yellow>시현류 반동 시작: 10초간 힘이 30에서 1로 감소합니다.");
 
         BukkitTask task = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
             long elapsed = 0L;
@@ -114,16 +123,20 @@ public final class ShihyeonryuService {
                 if (elapsed >= BURNOUT_DURATION_TICKS) {
                     online.removePotionEffect(PotionEffectType.STRENGTH);
                     online.removePotionEffect(PotionEffectType.SLOWNESS);
-                    online.sendMessage("시현류 반동 종료");
+                    config.send(online, "shihyeonryu.burnout-ended", "<yellow>시현류 반동 종료");
                     stop();
                     return;
                 }
 
                 int level = calculateStrengthLevel(elapsed);
-                online.addPotionEffect(
-                        new PotionEffect(PotionEffectType.STRENGTH, 12, level - 1, false, false, true),
+                applyPotionEffect(online, new PotionEffect(
+                        PotionEffectType.STRENGTH,
+                        12,
+                        level - 1,
+                        false,
+                        false,
                         true
-                );
+                ));
                 elapsed += 10L;
             }
 
@@ -139,10 +152,14 @@ public final class ShihyeonryuService {
     }
 
     private int calculateStrengthLevel(long elapsedTicks) {
-        double progress = Math.min(1.0D, Math.max(0.0D, elapsedTicks / (double) BURNOUT_DURATION_TICKS));
+        double progress = Math.clamp(elapsedTicks / (double) BURNOUT_DURATION_TICKS, 0.0D, 1.0D);
         int delta = BURNOUT_START_STRENGTH_LEVEL - BURNOUT_END_STRENGTH_LEVEL;
         int level = BURNOUT_START_STRENGTH_LEVEL - (int) Math.floor(delta * progress);
-        return Math.max(BURNOUT_END_STRENGTH_LEVEL, level);
+        return Math.clamp(level, BURNOUT_END_STRENGTH_LEVEL, BURNOUT_START_STRENGTH_LEVEL);
+    }
+
+    private void applyPotionEffect(Player player, PotionEffect effect) {
+        player.addPotionEffect(effect);
     }
 
     private boolean isSword(@Nullable ItemStack item) {

@@ -1,0 +1,97 @@
+# MiniMessage and legacy color codes are supported.
+
+land:
+  settings:
+    claim-radius: 50
+    max-lands: 3
+    name-pattern: '^[A-Za-z0-9가-힣_-]{1,24}$'
+  particles:
+    duration-seconds: 10
+    interval-ticks: 10
+    step: 2
+    line:
+      type: DUST
+      color: '#55FF55'
+      size: 1.4
+      count: 2
+      offset: 0.08
+    corner:
+      type: END_ROD
+      height: 5
+      count: 2
+      offset: 0.05
+  sounds:
+    success:
+      enabled: true
+      name: ENTITY_PLAYER_LEVELUP
+      volume: 0.8
+      pitch: 1.2
+    deny:
+      enabled: true
+      name: ENTITY_VILLAGER_NO
+      volume: 0.7
+      pitch: 0.8
+    request:
+      enabled: true
+      name: BLOCK_NOTE_BLOCK_PLING
+      volume: 0.8
+      pitch: 1.4
+    boundary:
+      enabled: true
+      name: BLOCK_AMETHYST_BLOCK_CHIME
+      volume: 0.8
+      pitch: 1.1
+  titles:
+    fade-in-ticks: 5
+    stay-ticks: 40
+    fade-out-ticks: 10
+    enter-owned-title: '<green>나의 땅'
+    enter-owned-subtitle: '<white>%land% 구역에 진입했습니다.'
+    enter-member-title: '<green>%owner%님의 땅'
+    enter-member-subtitle: '<white>%land% 구역에 진입했습니다.'
+    enter-other-title: '<red>타인의 땅'
+    enter-other-subtitle: '<white>상호작용이 불가능한 구역입니다.'
+    leave-title: '<gray>야생'
+    leave-subtitle: '<white>주인 없는 구역으로 나왔습니다.'
+  messages:
+    invalid-name: '<red>땅 이름은 한글, 영문, 숫자, _, - 조합으로 1~24자만 가능합니다.'
+    name-exists: '<red>이미 존재하는 땅 이름입니다. 다른 이름을 사용해 주세요.'
+    max-reached: '<red>더 이상 땅을 설정할 수 없습니다! (최대 %max%개)'
+    overlap: '<red>설정하려는 구역이 ''%land%'' 땅과 겹칩니다! 다른 곳에 설정해 주세요.'
+    created: '<green>성공적으로 ''%land%'' 땅을 설정했습니다! 중심 반경: %radius%블럭'
+    created-boundary-hint: '<yellow>/땅경계 %land% <white>명령어로 테두리를 확인할 수 있습니다.'
+    not-found: '<red>존재하지 않는 땅입니다.'
+    not-owner: '<red>해당 땅의 소유자만 사용할 수 있습니다.'
+    deleted: '<green>''%land%'' 땅을 삭제했습니다.'
+    target-offline: '<red>해당 플레이어는 접속 중이 아닙니다.'
+    not-member: '<red>해당 플레이어는 이 땅의 멤버가 아닙니다.'
+    member-kicked: '<yellow>%player% 님을 ''%land%'' 땅에서 추방했습니다.'
+    member-kicked-notify: '<red>''%land%'' 땅에서 추방되었습니다.'
+    request-no-land: '<red>현재 서 있는 곳은 다른 사람의 땅이 아닙니다.'
+    already-allowed: '<yellow>이미 이 땅에서 상호작용할 수 있습니다.'
+    request-sent: '<green>%owner% 님에게 ''%land%'' 땅 허락 요청을 보냈습니다.'
+    request-received: '<yellow>%player% 님이 ''%land%'' 땅 허락을 요청했습니다. /허락수락 %land% %player%'
+    no-request: '<red>해당 플레이어의 허락 요청이 없습니다.'
+    request-accepted: '<green>%player% 님에게 ''%land%'' 땅 권한을 부여했습니다.'
+    request-accepted-notify: '<green>''%land%'' 땅 권한을 받았습니다.'
+    transfer-self: '<red>자기 자신에게는 땅을 양도할 수 없습니다.'
+    transferred: '<green>''%land%'' 땅을 %player% 님에게 양도했습니다.'
+    transferred-notify: '<green>%player% 님이 ''%land%'' 땅을 양도했습니다.'
+    info: '<yellow>%land% <gray>| <white>소유자: %owner% <gray>| <white>월드: %world% <gray>| <white>X %min_x%~%max_x%, Z %min_z%~%max_z% <gray>| <white>멤버: %members%'
+    list-empty: '<yellow>보유한 땅이 없습니다.'
+    list: '<yellow>내 땅: <white>%lands%'
+    boundary-wrong-world: '<red>해당 땅이 있는 월드에서만 경계를 볼 수 있습니다. 월드: %world%'
+    boundary-start: '<green>''%land%'' 땅의 경계선을 %seconds%초 동안 표시합니다.'
+    enter-other-chat: '<red>[%owner%]님의 땅입니다. 상자를 열거나 건축하려면 <yellow>/허락요청 <red>명령어를 치세요.'
+    break-denied: '<red>[%owner%]님의 땅에서는 블록을 파괴할 수 없습니다.'
+    place-denied: '<red>[%owner%]님의 땅에서는 블록을 설치할 수 없습니다.'
+    interact-denied: '<red>[%owner%]님의 허락 없이 상호작용할 수 없습니다.'
+    usage-create: '<yellow>사용법: /땅설정 \<땅이름>'
+    usage-boundary: '<yellow>사용법: /땅경계 \<땅이름>'
+    usage-delete: '<yellow>사용법: /땅삭제 \<땅이름>'
+    usage-kick: '<yellow>사용법: /땅추방 \<땅이름> \<플레이어>'
+    usage-request: '<yellow>사용법: /허락요청'
+    usage-accept: '<yellow>사용법: /허락수락 \<땅이름> \<플레이어>'
+    usage-transfer: '<yellow>사용법: /땅양도 \<땅이름> \<플레이어>'
+    usage-list: '<yellow>사용법: /땅목록'
+    usage-info: '<yellow>사용법: /땅정보 [땅이름]'

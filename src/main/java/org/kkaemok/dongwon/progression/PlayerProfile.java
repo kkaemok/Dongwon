@@ -1,15 +1,38 @@
 package org.kkaemok.dongwon.progression;
 
+import org.kkaemok.dongwon.job.JobType;
+
 public final class PlayerProfile {
     private static final String DEFAULT_GUILD_NAME = "미가입";
 
+    private String playerName = "";
+    private JobType jobType = JobType.NONE;
     private long can;
     private long silverCan;
     private long goldenCan;
-    private long masteryExp;
-    private int masteryLevel;
-    private MasterySpecialization specialization = MasterySpecialization.NONE;
+    private int level;
+    private double levelExp;
+    private long swordsmanMasteryExp;
+    private int swordsmanMasteryLevel;
+    private MasterySpecialization swordsmanSpecialization = MasterySpecialization.NONE;
+    private long fishermanMasteryExp;
     private String guildName = DEFAULT_GUILD_NAME;
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName == null ? "" : playerName;
+    }
+
+    public JobType getJobType() {
+        return jobType;
+    }
+
+    public void setJobType(JobType jobType) {
+        this.jobType = jobType == null ? JobType.NONE : jobType;
+    }
 
     public long getCan() {
         return can;
@@ -43,28 +66,52 @@ public final class PlayerProfile {
         this.goldenCan = Math.max(0L, goldenCan);
     }
 
-    public long getMasteryExp() {
-        return masteryExp;
+    public int getLevel() {
+        return level;
     }
 
-    public void addMasteryExp(long amount) {
-        masteryExp += Math.max(0L, amount);
+    public void setLevel(int level) {
+        this.level = Math.clamp(level, 0, 50);
     }
 
-    public int getMasteryLevel() {
-        return masteryLevel;
+    public double getLevelExp() {
+        return levelExp;
     }
 
-    public void setMasteryLevel(int masteryLevel) {
-        this.masteryLevel = Math.max(0, masteryLevel);
+    public void setLevelExp(double levelExp) {
+        this.levelExp = Math.max(0.0D, levelExp);
     }
 
-    public MasterySpecialization getSpecialization() {
-        return specialization;
+    public long getSwordsmanMasteryExp() {
+        return swordsmanMasteryExp;
     }
 
-    public void setSpecialization(MasterySpecialization specialization) {
-        this.specialization = specialization == null ? MasterySpecialization.NONE : specialization;
+    public void addSwordsmanMasteryExp(long amount) {
+        swordsmanMasteryExp += Math.max(0L, amount);
+    }
+
+    public int getSwordsmanMasteryLevel() {
+        return swordsmanMasteryLevel;
+    }
+
+    public void setSwordsmanMasteryLevel(int swordsmanMasteryLevel) {
+        this.swordsmanMasteryLevel = Math.max(0, swordsmanMasteryLevel);
+    }
+
+    public MasterySpecialization getSwordsmanSpecialization() {
+        return swordsmanSpecialization;
+    }
+
+    public void setSwordsmanSpecialization(MasterySpecialization specialization) {
+        this.swordsmanSpecialization = specialization == null ? MasterySpecialization.NONE : specialization;
+    }
+
+    public long getFishermanMasteryExp() {
+        return fishermanMasteryExp;
+    }
+
+    public void addFishermanMasteryExp(long amount) {
+        fishermanMasteryExp += Math.max(0L, amount);
     }
 
     public String getGuildName() {

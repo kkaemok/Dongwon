@@ -28,7 +28,7 @@ public interface JobDefinition {
         return false;
     }
 
-    default @Nullable ItemStack rollFishingLoot() {
+    default @Nullable ItemStack rollFishingLoot(long fishingMasteryExp) {
         return null;
     }
 }

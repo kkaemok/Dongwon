@@ -1,0 +1,196 @@
+# MiniMessage and legacy color codes are supported.
+
+settings:
+  commands:
+    spawn: 'spawn'
+    shop: '상점'
+  defaults:
+    tpa-gui: true
+
+settings-menu:
+  title: '<dark_gray>설정'
+  tpa-gui:
+    material: ENDER_PEARL
+    state-enabled: '<green>켜짐'
+    state-disabled: '<red>꺼짐'
+    name: '<aqua>TPA 확인 GUI: %state%'
+    lore:
+      - '<gray>클릭하면 /tpa 요청 전 확인 메뉴를 켜거나 끕니다.'
+      - '<gray>현재 상태: %state%'
+
+menus:
+  compass:
+    material: COMPASS
+    name: '<yellow>서버 메뉴'
+    lore:
+      - '<gray>우클릭으로 서버 메뉴 열기'
+  filler:
+    material: GRAY_STAINED_GLASS_PANE
+    name: ' '
+  shared:
+    back:
+      material: BARRIER
+      name: '<red>뒤로가기'
+      lore: []
+  main:
+    title: '<dark_gray>서버 메뉴'
+    buttons:
+      teleport:
+        material: ENDER_PEARL
+        name: '<#55D6FF>-텔레포트-'
+        lore:
+          - '<gray>스폰, 홈, TPA, RTP 메뉴'
+      guild:
+        material: WHITE_BANNER
+        name: '<green>-길드-'
+        lore:
+          - '<gray>길드 요청 명령어를 입력합니다'
+      party:
+        material: AMETHYST_SHARD
+        name: '<light_purple>-파티-'
+        lore:
+          - '<gray>파티 생성, 초대, 수락 명령어를 입력합니다'
+      remit:
+        material: GOLD_INGOT
+        name: '<yellow>송금'
+        lore:
+          - '<gray>다른 플레이어에게 캔을 보냅니다'
+      basic-job:
+        material: IRON_SWORD
+        name: '<white>기본 직업 획득'
+        lore:
+          - '<gray>광부, 농부, 전사, 검사, 낚시꾼 중 선택'
+      storage:
+        material: CHEST
+        name: '<gold>창고'
+        lore:
+          - '<gray>개인 창고를 엽니다'
+          - '<dark_gray>54칸 저장'
+      land:
+        material: GRASS_BLOCK
+        name: '<green>땅설정'
+        lore:
+          - '<gray>현재 위치를 중심으로 땅을 설정합니다'
+          - '<dark_gray>기본 반경 50블럭'
+      info:
+        material: BOOK
+        name: '<light_purple>-내정보-'
+        lore:
+          - '<gray>직업과 보유 캔을 확인합니다'
+  teleport:
+    title: '<dark_gray>텔레포트 메뉴'
+    buttons:
+      spawn:
+        material: LODESTONE
+        name: '<white>스폰'
+        lore: []
+      shop:
+        material: EMERALD
+        name: '<green>상점'
+        lore: []
+      home:
+        material: OAK_DOOR
+        name: '<yellow>홈'
+        lore: []
+      set-home:
+        material: COMPASS
+        name: '<gold>홈 설정'
+        lore:
+          - '<gray>현재 위치를 홈으로 저장합니다'
+      tpa:
+        material: PLAYER_HEAD
+        name: '<aqua>TPA'
+        lore:
+          - '<gray>온라인 플레이어에게 이동 요청'
+      rtp:
+        material: ENDER_EYE
+        name: '<light_purple>RTP'
+        lore:
+          - '<gray>현재 월드에서 랜덤 텔레포트'
+  tpa:
+    title: '<dark_gray>TPA 대상 선택'
+    target:
+      name: '<yellow>%player%'
+      lore:
+        - '<gray>클릭 시 TPA 요청 전송'
+    buttons:
+      empty:
+        material: BARRIER
+        name: '<red>보낼 수 있는 대상이 없습니다'
+        lore: []
+  basic-job:
+    title: '<dark_gray>기본 직업 선택'
+    buttons:
+      miner:
+        material: IRON_PICKAXE
+        name: '<white>광부'
+        lore: []
+      farmer:
+        material: WHEAT
+        name: '<green>농부'
+        lore:
+          - '<gray>작물 수확량이 20% 증가합니다'
+      warrior:
+        material: IRON_SWORD
+        name: '<white>전사'
+        lore: []
+      buffer:
+        material: NETHER_STAR
+        name: '<yellow>버퍼'
+        lore:
+          - '<gray>주변 플레이어에게 힘 I, 속도 I'
+          - '<gray>120초마다 파티원 방어용 홀리 아머 획득'
+      swordsman:
+        material: DIAMOND_SWORD
+        name: '<white>검사'
+        lore: []
+      healer:
+        material: GLISTERING_MELON_SLICE
+        name: '<green>힐러'
+        lore:
+          - '<gray>주변 파티원에게 5초마다 재생 I 부여'
+          - '<gray>120초마다 파티원 회복용 힐 획득'
+      fisherman:
+        material: FISHING_ROD
+        name: '<white>낚시꾼'
+        lore: []
+
+messages:
+  common:
+    player-only: '<red>플레이어만 사용할 수 있습니다.'
+  settings:
+    tpa-gui-enabled: '<green>TPA 확인 GUI를 켰습니다.'
+    tpa-gui-disabled: '<red>TPA 확인 GUI를 껐습니다.'
+  menu:
+    compass:
+      given: '<green>서버 메뉴 버튼을 지급했습니다.'
+      already-has: '<yellow>이미 서버 메뉴 버튼을 가지고 있습니다.'
+      inventory-full: '<red>인벤토리에 빈 칸이 없어 서버 메뉴 버튼을 지급할 수 없습니다.'
+      drop-blocked: '<red>서버 메뉴 버튼은 버릴 수 없습니다.'
+    guild:
+      prompt: '<yellow>[길드] /길드 요청 명령어를 채팅창에 입력하세요.'
+      click: '<aqua>[클릭해서 입력]'
+    party:
+      prompt: '<yellow>[파티] /파티 생성 또는 /파티 초대 <플레이어>를 입력하세요.'
+      click-create: '<aqua>[파티 생성]'
+      click-invite: '<light_purple>[파티 초대 입력]'
+    land:
+      prompt: '<yellow>[땅설정] 현재 위치를 중심으로 땅을 만들려면 /땅설정 \<땅이름>'
+      click-create: '<green>[땅 생성 입력]'
+      click-list: '<aqua>[내 땅 목록]'
+    remit:
+      prompt: '<yellow>[송금] /송금 \<플레이어> \<수량>'
+      click: '<gold>[클릭해서 입력]'
+    tpa-target-offline: '<red>대상 플레이어가 접속 중이 아닙니다.'
+    basic-job-selected: '<green>기본 직업을 선택했습니다: %job%'
+    info:
+      header: '<yellow>내정보'
+      name: '<white>이름 | %player%'
+      job: '<white>직업 | %job%'
+      currency: '<white>캔 | %can% | 실버캔 | %silver_can% | 황금캔 | %golden_can%'
+  home:
+    set-overworld-only: '<red>홈 설정은 오버월드에서만 가능합니다.'
+    set-success: '<green>홈이 설정되었습니다.'
+    not-set: '<red>설정된 홈이 없습니다. 오버월드에서 홈 설정을 먼저 해주세요.'
+    overworld-missing: '<red>오버월드를 찾을 수 없어 홈으로 이동할 수 없습니다.'
+    teleport-success: '<green>홈으로 이동했습니다.'

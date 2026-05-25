@@ -2,63 +2,54 @@ package org.kkaemok.dongwon.job;
 
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.kkaemok.dongwon.progression.ProfileManager;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public final class JobManager {
     private final JavaPlugin plugin;
-    private final File file;
-    private final Map<UUID, JobType> jobs = new HashMap<>();
-    private YamlConfiguration config;
+    private final ProfileManager profileManager;
 
-    public JobManager(JavaPlugin plugin) {
+    public JobManager(JavaPlugin plugin, ProfileManager profileManager) {
         this.plugin = plugin;
-        if (!plugin.getDataFolder().exists()) {
-            //noinspection ResultOfMethodCallIgnored
-            plugin.getDataFolder().mkdirs();
-        }
-        this.file = new File(plugin.getDataFolder(), "jobs.yml");
-        this.config = YamlConfiguration.loadConfiguration(file);
-        load();
+        this.profileManager = profileManager;
+        migrateLegacyJobs();
     }
 
     public JobType getJob(UUID uuid) {
-        return jobs.getOrDefault(uuid, JobType.NONE);
+        return profileManager.getJob(uuid);
     }
 
     public void setJob(UUID uuid, JobType jobType) {
-        jobs.put(uuid, jobType);
-        config.set("players." + uuid, jobType.getKey());
-        save();
+        profileManager.setJob(uuid, jobType);
     }
 
-    public void load() {
-        jobs.clear();
-        this.config = YamlConfiguration.loadConfiguration(file);
+    private void migrateLegacyJobs() {
+        File file = new File(plugin.getDataFolder(), "jobs.yml");
+        if (!file.exists()) {
+            return;
+        }
+
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
         if (config.getConfigurationSection("players") == null) {
             return;
         }
-        for (String key : config.getConfigurationSection("players").getKeys(false)) {
+        for (String key : Objects.requireNonNull(config.getConfigurationSection("players")).getKeys(false)) {
             try {
                 UUID uuid = UUID.fromString(key);
                 String raw = config.getString("players." + key, "none");
                 JobType jobType = JobType.fromInput(raw).orElse(JobType.NONE);
-                jobs.put(uuid, jobType);
+                profileManager.migrateJob(uuid, jobType);
             } catch (IllegalArgumentException ignored) {
                 // invalid uuid key; ignore silently
             }
         }
+        profileManager.save();
     }
 
     public void save() {
-        try {
-            config.save(file);
-        } catch (IOException e) {
-            plugin.getLogger().warning("jobs.yml 저장 실패: " + e.getMessage());
-        }
+        profileManager.save();
     }
 }

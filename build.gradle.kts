@@ -15,7 +15,7 @@ repositories {
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT")
     compileOnly("net.luckperms:api:5.4")
-    implementation("fr.mrmicky:fastboard:2.1.5")
+    compileOnly("fr.mrmicky:fastboard:2.1.5")
 }
 
 java {

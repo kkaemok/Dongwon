@@ -1,42 +1,92 @@
 name: Dongwon
-description: RPG 서버 '동원'의 핵심 기능들.
+description: Core plugin for server Dongwon.
 version: '${version}'
 
 main: org.kkaemok.dongwon.Dongwon
 api-version: '1.21'
 load: POSTWORLD
 
-authors: [kkaemok]
-website: https://github.com/kkaemok/Dongwon
-depend: [LuckPerms]
+authors: [ kkaemok ]
+
+depend: [ LuckPerms ]
+
+libraries:
+  - fr.mrmicky:fastboard:2.1.5
 
 commands:
   직업:
-    description: 현재 직업 조회 및 목록 확인
-    usage: "/직업 [목록|직업명]"
+    description: View or change your current job
+    usage: /직업 [목록|직업명]
   직업설정:
-    description: 플레이어 직업 설정
-    usage: "/직업설정 <플레이어> <직업명>"
+    description: Set a player's job
+    usage: /직업설정 <플레이어> <직업명>
+    permission: dongwon.op
   숙련도:
-    description: 숙련도/특화/화폐 정보 확인
-    usage: "/숙련도 [선택 <시현류|진-검사>]"
+    description: View current job mastery or choose swordsman specialization
+    usage: /숙련도 [선택 <시현류|진-검사>]
   길드:
-    description: 길드 관리 명령어
-    usage: "/길드 <생성|삭제|탈퇴|정보|퇴출|요청|가입|목록|수락|거절|초대> [이름|플레이어] [색]"
+    description: Guild command
+    usage: /길드 <생성|삭제|탈퇴|정보|퇴출|요청|가입|목록|수락|거절|초대> [이름|플레이어] [색]
   동원:
-    description: 동원 관리자 명령어
-    usage: "/동원 <직업설정|캔설정|캔지급|길드관리> ..."
+    description: Dongwon admin command
+    usage: /동원 <직업설정|캔설정|캔지급|길드관리|리로드> ...
+    permission: dongwon.op
   메뉴:
-    description: 서버 메뉴를 엽니다
-    usage: "/메뉴"
+    description: Open server menu
+    usage: /메뉴
+  메뉴지급:
+    description: Receive the server menu button
+    usage: /메뉴지급
+  설정:
+    description: Open player settings menu
+    usage: /설정
+  창고:
+    description: Open personal storage
+    usage: /창고
   송금:
-    description: 플레이어에게 화폐를 송금합니다
-    usage: "/송금 <플레이어> <수량>"
+    description: Send cans to another player
+    usage: /송금 <플레이어> [캔] <수량>
+  파티:
+    description: Party command
+    usage: /파티 <생성|초대|수락|거절|퇴출|해제|탈퇴|정보> [플레이어]
+  땅설정:
+    description: Create a land claim centered on your current position
+    usage: /땅설정 <땅이름>
+  땅경계:
+    description: Show a land claim boundary
+    usage: /땅경계 <땅이름>
+  땅삭제:
+    description: Delete your land claim
+    usage: /땅삭제 <땅이름>
+  땅추방:
+    description: Remove a member from your land claim
+    usage: /땅추방 <땅이름> <플레이어>
+  허락요청:
+    description: Request access to the land you are standing in
+    usage: /허락요청
+  허락수락:
+    description: Accept a land access request
+    usage: /허락수락 <땅이름> <플레이어>
+  땅양도:
+    description: Transfer land ownership
+    usage: /땅양도 <땅이름> <플레이어>
+  땅목록:
+    description: List your land claims
+    usage: /땅목록
+  땅정보:
+    description: Show land claim information
+    usage: /땅정보 [땅이름]
   tpa:
-    description: 플레이어에게 순간이동 요청을 보냅니다
-    usage: "/tpa <플레이어> | /tpa <수락|거절> [플레이어]"
+    description: Send or reply to teleport request
+    usage: /tpa <플레이어|수락|거절> [플레이어]
+  rtp:
+    description: Random teleport
+    usage: /rtp
 
 permissions:
   dongwon.op:
-    description: 동원 서버 관리자 권한
+    description: Allows using Dongwon admin commands
+    default: op
+  dongwon.land.bypass:
+    description: Bypass land protection and manage land claims
     default: op

@@ -1,0 +1,8 @@
+duration-seconds: 4
+color: GREEN
+overlay: PROGRESS
+
+messages:
+  exp-gain: '<green>[Lv. %level%] <white>다음 Lv. %next_level%까지 %exp% / %required_exp% XP <gray>(+%gain%)'
+  level-up: '<gold>[Lv. %level%] 레벨 업! <white>다음 Lv. %next_level%까지 %exp% / %required_exp% XP'
+  max-level: '<gold>[Lv. 50] 최고 레벨입니다 <gray>(+%gain%)'

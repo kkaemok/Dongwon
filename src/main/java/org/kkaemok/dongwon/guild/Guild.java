@@ -62,10 +62,6 @@ public final class Guild {
         members.remove(playerId);
     }
 
-    public boolean isMember(UUID playerId) {
-        return members.contains(playerId);
-    }
-
     public String getColoredName() {
         return colorCode + name + "§r";
     }

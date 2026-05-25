@@ -8,8 +8,11 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitTask;
 import org.kkaemok.dongwon.job.JobManager;
 import org.kkaemok.dongwon.job.JobType;
+import org.kkaemok.dongwon.level.LevelExpFormatter;
+import org.kkaemok.dongwon.party.PartyManager;
 import org.kkaemok.dongwon.progression.PlayerProfile;
 import org.kkaemok.dongwon.progression.ProfileManager;
+import org.kkaemok.dongwon.text.ConfigText;
 
 import java.text.DecimalFormat;
 import java.util.HashMap;
@@ -20,22 +23,32 @@ public final class BoardService {
     private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("#,###");
 
     private final Plugin plugin;
+    private final FastBoardConfig config;
     private final JobManager jobManager;
     private final ProfileManager profileManager;
+    private final PartyManager partyManager;
     private final Map<UUID, FastBoard> boards = new HashMap<>();
     private BukkitTask updateTask;
 
-    public BoardService(Plugin plugin, JobManager jobManager, ProfileManager profileManager) {
+    public BoardService(
+            Plugin plugin,
+            FastBoardConfig config,
+            JobManager jobManager,
+            ProfileManager profileManager,
+            PartyManager partyManager
+    ) {
         this.plugin = plugin;
+        this.config = config;
         this.jobManager = jobManager;
         this.profileManager = profileManager;
+        this.partyManager = partyManager;
     }
 
     public void start() {
         if (updateTask != null) {
             updateTask.cancel();
         }
-        updateTask = Bukkit.getScheduler().runTaskTimer(plugin, this::updateAll, 0L, 20L);
+        updateTask = Bukkit.getScheduler().runTaskTimer(plugin, this::updateAll, 0L, config.updateIntervalTicks());
         for (Player player : Bukkit.getOnlinePlayers()) {
             createBoard(player);
         }
@@ -91,19 +104,20 @@ public final class BoardService {
         PlayerProfile profile = profileManager.get(playerId);
         JobType jobType = jobManager.getJob(playerId);
 
-        board.updateTitle("§6§lDongwon");
-        board.updateLines(
-                "§7이름 §f" + player.getName(),
-                "§7직업 §f" + jobType.getDisplayName(),
-                "§7길드 §f" + profile.getGuildName(),
-                "",
-                "§6황금캔 §f" + formatNumber(profile.getGoldenCan()),
-                "§7실버캔 §f" + formatNumber(profile.getSilverCan()),
-                "§f캔 §f" + formatNumber(profile.getCan()),
-                "",
-                "§a플레이타임",
-                "§f" + formatPlaytime(player)
-        );
+        ConfigText.Placeholder[] placeholders = {
+                ConfigText.placeholder("player", player.getName()),
+                ConfigText.placeholder("job", jobType.getColoredDisplayName()),
+                ConfigText.placeholder("guild", profile.getGuildName()),
+                ConfigText.placeholder("can", formatNumber(profile.getCan())),
+                ConfigText.placeholder("silver_can", formatNumber(profile.getSilverCan())),
+                ConfigText.placeholder("golden_can", formatNumber(profile.getGoldenCan())),
+                ConfigText.placeholder("level", profile.getLevel()),
+                ConfigText.placeholder("level_exp", LevelExpFormatter.format(profile.getLevelExp())),
+                ConfigText.placeholder("playtime", formatPlaytime(player))
+        };
+
+        board.updateTitle(config.title(placeholders));
+        board.updateLines(config.lines(partyManager.scoreboardLines(player), placeholders));
     }
 
     private String formatPlaytime(Player player) {

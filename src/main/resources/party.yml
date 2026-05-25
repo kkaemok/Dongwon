@@ -1,0 +1,46 @@
+# MiniMessage and legacy color codes are supported.
+
+scoreboard:
+  members-per-line: 3
+  none: '없음'
+  self-name: '나'
+  separator: ', '
+  first-line-format: '&7파티원 &f%members%'
+  next-line-format: '&7       &f%members%'
+
+messages:
+  common:
+    player-only: '<red>플레이어만 사용할 수 있습니다.'
+
+  party:
+    already-in-party: '<red>이미 파티에 가입되어 있습니다.'
+    created: '<green>파티를 생성했습니다.'
+    not-in-party: '<red>파티에 가입되어 있지 않습니다.'
+    leader-only: '<red>파티장만 사용할 수 있습니다.'
+    cannot-invite-self: '<red>자기 자신은 초대할 수 없습니다.'
+    target-already-in-party: '<red>해당 플레이어는 이미 파티에 가입되어 있습니다.'
+    target-offline: '<red>해당 플레이어는 접속 중이 아닙니다.'
+    invite-sent: '<green>%player% 님에게 파티 초대를 보냈습니다.'
+    invite-received: '<yellow>%player% 님이 파티에 초대했습니다. <white>/파티 수락'
+    no-invite: '<red>받은 파티 초대가 없습니다.'
+    invite-denied: '<yellow>파티 초대를 거절했습니다.'
+    invite-denied-notify: '<yellow>%player% 님이 파티 초대를 거절했습니다.'
+    cannot-kick-self: '<red>자기 자신은 퇴출할 수 없습니다.'
+    target-not-member: '<red>해당 플레이어는 파티원이 아닙니다.'
+    kicked: '<red>파티에서 퇴출되었습니다.'
+    kick-notify: '<yellow>%player% 님이 파티에서 퇴출되었습니다.'
+    disbanded: '<red>파티가 해제되었습니다.'
+    joined: '<green>%player% 님이 파티에 참가했습니다.'
+    left: '<yellow>파티에서 탈퇴했습니다.'
+    leader-changed: '<yellow>%player% 님이 새 파티장이 되었습니다.'
+    leave-notify: '<yellow>%player% 님이 파티를 탈퇴했습니다.'
+    info: '<yellow>파티장: %leader% <gray>| <white>파티원: %members%'
+    usage:
+      create: '<yellow>/파티 생성'
+      invite: '<yellow>/파티 초대 <플레이어>'
+      accept: '<yellow>/파티 수락'
+      deny: '<yellow>/파티 거절'
+      kick: '<yellow>/파티 퇴출 <플레이어>'
+      disband: '<yellow>/파티 해제'
+      leave: '<yellow>/파티 탈퇴'
+      info: '<yellow>/파티 정보'
